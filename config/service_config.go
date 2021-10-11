@@ -74,6 +74,9 @@ type ServiceConfig struct {
 	ParamSign                   string            `yaml:"param.sign" json:"param.sign,omitempty" property:"param.sign"`
 	Tag                         string            `yaml:"tag" json:"tag,omitempty" property:"tag"`
 	GrpcMaxMessageSize          int               `default:"4" yaml:"max_message_size" json:"max_message_size,omitempty"`
+	// StopAutoPublishServiceMetadata is used by dapr raw service, which could stop auto metadata report of dubbo-go,
+	// and report raw metadata by api invocation.
+	StopAutoPublishServiceMetadata bool
 
 	Protocols     map[string]*ProtocolConfig
 	unexported    *atomic.Bool
@@ -234,7 +237,10 @@ func (c *ServiceConfig) Export() error {
 			}
 			c.exporters = append(c.exporters, exporter)
 		}
-		publishServiceDefinition(ivkURL)
+
+		if !c.StopAutoPublishServiceMetadata {
+			publishServiceDefinition(ivkURL)
+		}
 	}
 	c.exported.Store(true)
 	return nil
