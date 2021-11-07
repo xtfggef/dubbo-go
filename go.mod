@@ -15,7 +15,7 @@ require (
 	github.com/dubbogo/gost v1.11.14
 	github.com/emicklei/go-restful/v3 v3.4.0
 	github.com/fsnotify/fsnotify v1.4.9
-	github.com/go-co-op/gocron v0.1.1
+	github.com/go-co-op/gocron v1.9.0
 	github.com/go-resty/resty/v2 v2.3.0
 	github.com/golang/mock v1.4.4
 	github.com/golang/protobuf v1.4.3
