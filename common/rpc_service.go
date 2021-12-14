@@ -71,6 +71,11 @@ func GetReference(service RPCService) string {
 	return ref
 }
 
+// RPCService the type alias of interface{}
+type TriplePBService interface {
+	XXX_InterfaceName() string
+}
+
 // AsyncCallbackService callback interface for async
 type AsyncCallbackService interface {
 	// Callback: callback

@@ -20,6 +20,7 @@ package getty
 import (
 	"crypto/tls"
 	"fmt"
+	gxtime "github.com/dubbogo/gost/time"
 	"math/rand"
 	"net"
 	"sync"
@@ -205,7 +206,7 @@ func (c *Client) Request(request *remoting.Request, timeout time.Duration, respo
 	}
 
 	select {
-	case <-getty.GetTimeWheel().After(timeout):
+	case <-gxtime.After(timeout):
 		return perrors.WithStack(errClientReadTimeout)
 	case <-response.Done:
 		err = response.Err

@@ -18,12 +18,12 @@
 package consul
 
 import (
+	gxtime "github.com/dubbogo/gost/time"
 	"strconv"
 	"time"
 )
 
 import (
-	getty "github.com/apache/dubbo-getty"
 	consul "github.com/hashicorp/consul/api"
 	perrors "github.com/pkg/errors"
 )
@@ -211,7 +211,7 @@ func (r *consulRegistry) Destroy() {
 	select {
 	case <-done:
 		logger.Infof("consulRegistry unregister done")
-	case <-getty.GetTimeWheel().After(registryDestroyDefaultTimeout):
+	case <-gxtime.After(registryDestroyDefaultTimeout):
 		logger.Errorf("consul unregister timeout")
 	}
 

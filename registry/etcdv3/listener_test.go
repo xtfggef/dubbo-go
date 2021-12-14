@@ -18,13 +18,13 @@
 package etcdv3
 
 import (
+	gxtime "github.com/dubbogo/gost/time"
 	"os"
 	"testing"
 	"time"
 )
 
 import (
-	"github.com/apache/dubbo-getty"
 	"github.com/coreos/etcd/embed"
 	"github.com/stretchr/testify/suite"
 )
@@ -57,7 +57,7 @@ func (suite *RegistryTestSuite) SetupSuite() {
 	select {
 	case <-e.Server.ReadyNotify():
 		t.Log("Server is ready!")
-	case <-getty.GetTimeWheel().After(60 * time.Second):
+	case <-gxtime.After(60 * time.Second):
 		e.Server.Stop() // trigger a shutdown
 		t.Logf("Server took too long to start!")
 	}

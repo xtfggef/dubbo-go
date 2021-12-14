@@ -18,12 +18,12 @@
 package etcdv3
 
 import (
+	gxtime "github.com/dubbogo/gost/time"
 	"sync"
 	"time"
 )
 
 import (
-	"github.com/apache/dubbo-getty"
 	perrors "github.com/pkg/errors"
 )
 
@@ -75,7 +75,7 @@ LOOP:
 				case <-r.Done():
 					logger.Warnf("(ETCDV3ProviderRegistry)reconnectETCDRegistry goroutine exit now...")
 					break LOOP
-				case <-getty.GetTimeWheel().After(timeSecondDuration(failTimes * ConnDelay)): // avoid connect frequent
+				case <-gxtime.After(timeSecondDuration(failTimes * ConnDelay)): // avoid connect frequent
 				}
 				err = ValidateClient(
 					r,

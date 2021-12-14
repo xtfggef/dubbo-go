@@ -32,6 +32,11 @@ func SetConsumerService(service common.RPCService) {
 	conServices[ref] = service
 }
 
+// SetConsumerService is called by init() of implement of RPCService
+func SetConsumerServiceWithKey(key string, service common.RPCService) {
+	conServices[key] = service
+}
+
 // SetProviderService is called by init() of implement of RPCService
 func SetProviderService(service common.RPCService) {
 	ref := common.GetReference(service)
